@@ -1,28 +1,22 @@
-import { FC } from "react";
-import { List, ListItem, Stack, Typography } from "@mui/material";
+"use client";
+
+import { FC, useState } from "react";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import Link from "next/link";
-import styles from "./NavigationMenu.module.css";
 
 export const NavigationMenu: FC = () => {
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
   return (
-    <Stack component="nav" className={styles.nav}>
-      <List className={styles.navList}>
-        <Link className={styles.navItem} href="/">
-          <Typography component="span" className={styles.navLink}>
-            Главная страница
-          </Typography>
-        </Link>
-        <ListItem component={Link} className={styles.navItem} href="/shop">
-          <Typography component="span" className={styles.navLink}>
-            Shop
-          </Typography>
-        </ListItem>
-        <ListItem component={Link} className={styles.navItem} href="/login">
-          <Typography component="span" className={styles.navLink}>
-            Login
-          </Typography>
-        </ListItem>
-      </List>
-    </Stack>
+    <Tabs value={value} onChange={handleChange} centered>
+      <Tab component={Link} href="/" label="Главная страница" />
+      <Tab component={Link} href="/login" label="Авторизация" />
+      <Tab component={Link} href="/shop" label="Магазин" />
+    </Tabs>
   );
 };

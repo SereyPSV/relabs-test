@@ -1,7 +1,6 @@
 "use client";
 
 import { createTheme } from "@mui/material";
-// import { createTheme } from "@mui/material/styles";
 
 export const theme = createTheme({
   components: {
@@ -12,7 +11,7 @@ export const theme = createTheme({
           fontStyle: "normal",
           fontDisplay: "swap",
           fontWeight: "400 600 800",
-          src: 'local("Manrope"), url(public/fonts/Manrope.woff2) format("woff2")',
+          src: `local('Manrope'), url('/fonts/Manrope.woff2') format('woff2')`,
         },
       },
     },

@@ -1,14 +1,27 @@
 import { FC } from "react";
 import { Stack, Typography } from "@mui/material";
-import { NavigationMenu } from "src/widgets";
+import { EventsListWidget, NavigationMenu, UsersListWidget } from "src/widgets";
+import { IUserItem } from "src/entities";
+import useWebSocket from "react-use-websocket";
 
 export const MainPage: FC = () => {
   return (
-    <Stack className="main-page__container">
+    <Stack sx={{ gap: "20px" }}>
       <NavigationMenu />
-      <Typography component="h1" className="main__title">
-        Main page
-      </Typography>
+      <Stack sx={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <Stack sx={{ width: "60%", alignItems: "center", gap: "20px" }}>
+          <Typography variant="h4" component="h2">
+            Список пользователей
+          </Typography>
+          <UsersListWidget />
+        </Stack>
+        <Stack sx={{ width: "35%", alignItems: "center", gap: "20px" }}>
+          <Typography variant="h4" component="h2">
+            События
+          </Typography>
+          <EventsListWidget />
+        </Stack>
+      </Stack>
     </Stack>
   );
 };

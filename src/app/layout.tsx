@@ -1,7 +1,7 @@
 import { CssBaseline, Stack, ThemeProvider } from "@mui/material";
 import { Metadata } from "next";
 import { FC, PropsWithChildren } from "react";
-import { theme } from "src/shared/theme";
+import { theme } from "src/shared";
 import "./globals.css";
 
 export const metadata: Metadata = {

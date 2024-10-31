@@ -4,24 +4,18 @@ import { FC, FormEvent, useState } from "react";
 import {
   Button,
   CircularProgress,
+  IconButton,
+  InputAdornment,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
-import styles from "./LoginForm.module.css";
-
-const slotProps = {
-  input: {
-    style: { color: "#ededed" },
-  },
-  inputLabel: {
-    style: { color: "#ededed" },
-  },
-};
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 export const LoginForm: FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ email: "", password: "" });
 
@@ -68,32 +62,52 @@ export const LoginForm: FC = () => {
       }, 2000);
     }
   };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <Stack
-      component={"form"}
+      component="form"
       onSubmit={handleSubmit}
-      className={styles.formContainer}
+      sx={{ width: "600px", alignItems: "center", gap: "20px" }}
     >
-      <Stack component={"div"} className={styles.loginForm}>
+      <Stack component="div" sx={{ width: "100%" }}>
         <TextField
           label="Электронная почта"
           fullWidth
           margin="normal"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          slotProps={slotProps}
+          disabled={loading}
         />
         {error.email && <Typography color="error">{error.email}</Typography>}
       </Stack>
-      <Stack component={"div"} className={styles.loginForm}>
+      <Stack component="div" sx={{ width: "100%" }}>
         <TextField
           label="Пароль"
-          type="password"
+          type={showPassword ? "text" : "password"}
           fullWidth
           margin="normal"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          slotProps={slotProps}
+          disabled={loading}
+          slotProps={{
+            input: {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            },
+          }}
         />
         {error.password && (
           <Typography color="error">{error.password}</Typography>
@@ -102,6 +116,7 @@ export const LoginForm: FC = () => {
       <Button
         type="submit"
         variant="contained"
+        size="large"
         color="primary"
         disabled={loading}
       >
