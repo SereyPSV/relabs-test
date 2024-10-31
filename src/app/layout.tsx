@@ -1,4 +1,4 @@
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline, Stack, ThemeProvider } from "@mui/material";
 import { Metadata } from "next";
 import { FC, PropsWithChildren } from "react";
 import { theme } from "src/shared/theme";
@@ -19,7 +19,9 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
       <body>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          {children}
+          <Stack component="main" className="root__container">
+            {children}
+          </Stack>
         </ThemeProvider>
       </body>
     </html>
