@@ -10,7 +10,7 @@ export const MainPage: FC = () => {
       <NavigationMenu />
       <Stack sx={{ flexDirection: "row", justifyContent: "space-between" }}>
         <Stack sx={{ width: "60%", alignItems: "center", gap: "20px" }}>
-          <Typography variant="h4" component="h2">
+          <Typography variant="h4" component="h1">
             Список пользователей
           </Typography>
           <UsersListWidget />
