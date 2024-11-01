@@ -14,6 +14,7 @@ import {
 import { FC, useEffect, useState } from "react";
 import { IUserItem } from "src/entities";
 import { formatDate } from "src/shared";
+import { nameColumnSx, userListContainerSx } from "./styles";
 
 const itemsPerPage = 5;
 
@@ -41,7 +42,7 @@ export const UsersListWidget: FC = () => {
     setUsers(users.filter((user) => user.id !== id));
   };
   return (
-    <Stack sx={{ alignItems: "center", gap: "30px" }}>
+    <Stack sx={userListContainerSx}>
       {loading ? (
         <CircularProgress />
       ) : (
@@ -50,7 +51,7 @@ export const UsersListWidget: FC = () => {
             <TableHead>
               <TableRow>
                 <TableCell>ID</TableCell>
-                <TableCell sx={{ width: "150px" }}>Имя</TableCell>
+                <TableCell sx={nameColumnSx}>Имя</TableCell>
                 <TableCell>Роль</TableCell>
                 <TableCell>Дата создания</TableCell>
                 <TableCell>Действия</TableCell>

@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { inputContainerSx, loginFormContainerSx } from "./styles";
 
 export const LoginForm: FC = () => {
   const [email, setEmail] = useState("");
@@ -68,12 +69,8 @@ export const LoginForm: FC = () => {
   };
 
   return (
-    <Stack
-      component="form"
-      onSubmit={handleSubmit}
-      sx={{ width: "600px", alignItems: "center", gap: "20px" }}
-    >
-      <Stack component="div" sx={{ width: "100%" }}>
+    <Stack component="form" onSubmit={handleSubmit} sx={loginFormContainerSx}>
+      <Stack component="div" sx={inputContainerSx}>
         <TextField
           label="Электронная почта"
           fullWidth
@@ -84,7 +81,7 @@ export const LoginForm: FC = () => {
         />
         {error.email && <Typography color="error">{error.email}</Typography>}
       </Stack>
-      <Stack component="div" sx={{ width: "100%" }}>
+      <Stack component="div" sx={inputContainerSx}>
         <TextField
           label="Пароль"
           type={showPassword ? "text" : "password"}
