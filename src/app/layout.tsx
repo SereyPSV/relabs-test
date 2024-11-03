@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { FC, PropsWithChildren } from "react";
 import { theme } from "src/shared";
 import "./globals.css";
+import { NavigationMenu } from "src/widgets";
 
 export const metadata: Metadata = {
   title: "ReLabs - React with Next.js",
@@ -20,6 +21,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Stack component="main" className="root__container">
+            <NavigationMenu />
             {children}
           </Stack>
         </ThemeProvider>

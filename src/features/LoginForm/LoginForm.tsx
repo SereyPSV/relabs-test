@@ -30,30 +30,33 @@ export const LoginForm: FC = () => {
   };
 
   const validatePasswordSymbols = (password: string) => {
-    return /[A-Z]/.test(password);
+    return /[A-ZА-ЯЁ]/.test(password);
   };
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    if (!validateEmail(email)) {
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+
+    if (!validateEmail(trimmedEmail)) {
       setError({ ...error, email: "Не корректный адрес электронной почты" });
     }
-    if (!validatePasswordLength(password)) {
+    if (!validatePasswordLength(trimmedPassword)) {
       setError({
         ...error,
         password: "Пароль должен содержать не менее 8 символов",
       });
     }
-    if (!validatePasswordSymbols(password)) {
+    if (!validatePasswordSymbols(trimmedPassword)) {
       setError({
         ...error,
         password: "Пароль должен содержать хотя бы одну заглавную букву",
       });
     }
     if (
-      validateEmail(email) &&
-      validatePasswordLength(password) &&
-      validatePasswordSymbols(password)
+      validateEmail(trimmedEmail) &&
+      validatePasswordLength(trimmedPassword) &&
+      validatePasswordSymbols(trimmedPassword)
     ) {
       setError({ email: "", password: "" });
       setLoading(true);

@@ -7,20 +7,28 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import useWebSocket from "react-use-websocket";
 import { IEventItem } from "src/entities";
 import { formatDate } from "src/shared";
 
 export const EventsListWidget: FC = () => {
   const [events, setEvents] = useState<IEventItem[]>([]);
-
-  useWebSocket("wss://test.dev-relabs.ru/event", {
+  const { getWebSocket } = useWebSocket("wss://test.dev-relabs.ru/event", {
     onMessage: (message) => {
       const event = JSON.parse(message.data);
       setEvents((prevEvents) => [...prevEvents, event]);
     },
   });
+
+  useEffect(() => {
+    return () => {
+      const socket = getWebSocket();
+      if (socket) {
+        socket.close();
+      }
+    };
+  }, [getWebSocket]);
 
   return (
     <Table>
