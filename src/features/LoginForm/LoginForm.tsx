@@ -35,28 +35,28 @@ export const LoginForm: FC = () => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    const trimmedEmail = email.trim();
-    const trimmedPassword = password.trim();
+    setEmail(email.trim());
+    setPassword(password.trim());
 
-    if (!validateEmail(trimmedEmail)) {
+    if (!validateEmail(email)) {
       setError({ ...error, email: "Не корректный адрес электронной почты" });
     }
-    if (!validatePasswordLength(trimmedPassword)) {
+    if (!validatePasswordLength(password)) {
       setError({
         ...error,
         password: "Пароль должен содержать не менее 8 символов",
       });
     }
-    if (!validatePasswordSymbols(trimmedPassword)) {
+    if (!validatePasswordSymbols(password)) {
       setError({
         ...error,
         password: "Пароль должен содержать хотя бы одну заглавную букву",
       });
     }
     if (
-      validateEmail(trimmedEmail) &&
-      validatePasswordLength(trimmedPassword) &&
-      validatePasswordSymbols(trimmedPassword)
+      validateEmail(email) &&
+      validatePasswordLength(password) &&
+      validatePasswordSymbols(password)
     ) {
       setError({ email: "", password: "" });
       setLoading(true);
